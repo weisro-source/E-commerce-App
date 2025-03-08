@@ -129,9 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-
 config.env
 
 access.log
 
-uploads/``
+uploads/

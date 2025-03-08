@@ -11,6 +11,8 @@ const userRoutes = require('./routes/user_routes');
 
 const authRoutes = require('./routes/authRoute');
 
+const reviewRoutes = require('./routes/review_route');
+
 const ApiError = require('./utils/ApiError');
 
 const globalError = require('./middlewares/errorMiddleware');
@@ -60,6 +62,7 @@ app.use('/api/v1/categories', categoryRoutes);
 app.use('/api/v1/subcategories', subCategoryRoute);
 app.use('/api/v1/brand', brandRoute);
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/reviews", reviewRoutes);
 
 // Root route
 app.get('/', (req, res) => {

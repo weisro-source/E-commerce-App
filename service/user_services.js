@@ -133,3 +133,29 @@ exports.updateLoggedUserPassword = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/users/:id
 // @access  Private/Admin
 exports.deleteUser = factory.deleteOne(User);
+
+// @desc    Update logged user data (without password, role)
+// @route   PUT /api/v1/users/updateMe
+// @access  Private/Protect
+exports.updateLoggedUserData = asyncHandler(async (req, res, next) => {
+    const updatedUser = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+        },
+        { new: true }
+    );
+
+    res.status(200).json({ data: updatedUser });
+});
+
+// @desc    Deactivate logged user
+// @route   DELETE /api/v1/users/deleteMe
+// @access  Private/Protect
+exports.deleteLoggedUserData = asyncHandler(async (req, res, next) => {
+    await User.findByIdAndUpdate(req.user._id, { active: false });
+
+    res.status(204).json({ status: 'Success' });
+});
